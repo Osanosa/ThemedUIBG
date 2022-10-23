@@ -1,0 +1,35 @@
+#!/sbin/sh
+
+OUTFD=${2}
+ZIPFILE=${3}
+#rwx permissions
+umask 022
+# Idk what's that some logging I guess
+ui_print() {
+    printf "ui_print %s\nui_print\n" "${*}" > /proc/self/fd/"${OUTFD}"
+}
+
+if [ -f /sbin/recovery ]; then
+    # Installing via recovery. Always do a direct install.
+    # Cleaning variables data I guess 
+    set -exu
+    # Checking forsystem type and file structure
+    ui_print 'Mounting system'
+    if mount /system_root; then
+        root_dir=/system_root
+    else
+        mount /system
+        root_dir=/
+    fi
+
+    ui_print 'Extracting files'
+    # Unzipping to a folder
+    unzip -o "${ZIPFILE}" 'system/*' -d "${root_dir}"
+
+    ui_print 'Done!'
+else
+    # Installing via Magisk Manager.
+    # DO NOT REMOVE NEXT LINE, IT'S MANDATORY
+        . /data/adb/magisk/util_functions.sh
+    install_module
+fi
