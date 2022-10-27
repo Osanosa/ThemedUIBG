@@ -2,11 +2,11 @@
 <manifest
     android:versionCode="1"
     android:versionName="1.0"
-    android:compileSdkVersion="29"
-    android:compileSdkVersionCodename="10"
+    android:compileSdkVersion="23"
+    android:compileSdkVersionCodename="6"
     package="themed.uibg.amoled"
-    platformBuildVersionCode="29"
-    platformBuildVersionName="10"
+    platformBuildVersionCode="23"
+    platformBuildVersionname="6"
     xmlns:android="http://schemas.android.com/apk/res/android">
     <overlay
         android:priority="1"
